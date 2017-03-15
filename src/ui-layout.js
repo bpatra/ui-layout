@@ -448,7 +448,14 @@ angular.module('ui.layout', [])
       // Perhaps there's a place where we could set... could find it though. @see also toggleBefore
       if (c.uncollapsedSize === undefined) {
         c.uncollapsedSize = c.size;
-      } else {
+      }
+      else if (ctrl.isPercent(c.uncollapsedSize)) {
+              var dividerSize = parseInt(opts.dividerSize);
+              var elementSize = $element[0].getBoundingClientRect()[ctrl.sizeProperties.sizeProperty];
+              var availableSize = elementSize - (dividerSize * numOfSplitbars);
+              c.uncollapsedSize = ctrl.convertToPixels(c.uncollapsedSize, availableSize);
+      } 
+      else {
         c.uncollapsedSize = parseInt(c.uncollapsedSize);
       }
       // FIXME: collapse:resize:uncollapse: works well "visually" without the nextSplitbar and nextContainer calculations
@@ -504,7 +511,13 @@ angular.module('ui.layout', [])
       // Perhaps there's a place where we could set... could find it though. @see also toggleBefore
       if (c.uncollapsedSize === undefined) {
         c.uncollapsedSize = c.size;
-      } else {
+      } else if (ctrl.isPercent(c.uncollapsedSize)) {
+            var dividerSize = parseInt(opts.dividerSize);
+            var elementSize = $element[0].getBoundingClientRect()[ctrl.sizeProperties.sizeProperty];
+            var availableSize = elementSize - (dividerSize * numOfSplitbars);
+            c.uncollapsedSize = ctrl.convertToPixels(c.uncollapsedSize, availableSize);
+      } 
+      else {
         c.uncollapsedSize = parseInt(c.uncollapsedSize);
       }
 
